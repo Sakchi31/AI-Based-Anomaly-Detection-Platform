@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "patient_vitals:1:1"
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+    depends_on:
+      - zookeeper
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: anomalydb
+    ports:
+      - "5432:5432"

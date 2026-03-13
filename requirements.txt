@@ -1,0 +1,9 @@
+flask
+streamlit
+kafka-python
+numpy
+pandas
+scikit-learn
+tensorflow
+psycopg2-binary
+plotly
